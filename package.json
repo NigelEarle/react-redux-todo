@@ -1,0 +1,7 @@
+{
+  "name": "react-redux-todo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "nwre87 <nwre87@gmail.com>",
+  "license": "MIT"
+}
