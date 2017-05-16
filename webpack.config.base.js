@@ -1,11 +1,10 @@
-const webpack = require('webpack');
 const path = require('path');
 
-const config = {
+const baseConfig = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js?x$/,
         exclude: /node_modules/,
         use: [
           'babel-loader',
@@ -24,10 +23,9 @@ const config = {
   output: {
     path: path.join(__dirname, '/build/'),
     fileName: 'bundle.js',
-    publicPath: '/',
   },
   resolve: {},
   plugins: [],
 };
 
-module.exports = config;
+module.exports = baseConfig;
