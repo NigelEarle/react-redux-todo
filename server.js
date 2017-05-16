@@ -2,11 +2,14 @@ const express = require('express');
 const webpack = require('webpack');
 const path = require('path');
 const devConfig = require('./webpack.config.development');
+const routes = require('./server/routes');
 
 const PORT = process.env.PORT || 3001;
 const isDev = process.env.NODE_ENV !== 'production';
 
 const app = express();
+
+app.use('/api', routes);
 
 if (isDev) {
   const compiler = webpack(devConfig);
