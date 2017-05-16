@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 const devConfig = require('./webpack.config.development');
 const routes = require('./server/routes');
+const db = require('./server/models');
 
 const PORT = process.env.PORT || 3001;
 const isDev = process.env.NODE_ENV !== 'production';
@@ -33,5 +34,6 @@ if (isDev) {
 }
 
 app.listen(PORT, () => {
+  db.sequelize.sync({ force: true });
   console.log(`listening on port: ${PORT}`);
 });
