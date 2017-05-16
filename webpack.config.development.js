@@ -19,13 +19,6 @@ devConfig.output = {
   filename: 'bundle.js',
 };
 
-devConfig.devServer = {
-  hot: true,
-  inline: true,
-  contentBase: path.resolve(__dirname, 'client'),
-  stats: { colors: true },
-};
-
 devConfig.module.rules.push(
   {
     test: /\.s?css$/,
