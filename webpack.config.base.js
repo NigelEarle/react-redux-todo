@@ -4,12 +4,14 @@ const baseConfig = {
   module: {
     rules: [
       {
-        test: /\.js?x$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader',
-          'react-hot-loader',
-        ],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env', 'react'],
+          },
+        },
       },
       {
         test: /\.(otf|woff|woff2|eot|ttf)/,
