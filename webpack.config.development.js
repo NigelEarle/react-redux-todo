@@ -7,6 +7,8 @@ const devConfig = Object.assign({}, baseConfig);
 
 devConfig.devtool = 'cheap-module-eval-source-map';
 devConfig.entry = [
+  'react-hot-loader/patch',
+  'webpack/hot/only-dev-server',
   'webpack-hot-middleware/client?reload=true',
   './client/app.js',
 ];
@@ -44,6 +46,7 @@ devConfig.plugins.push(
   }),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
+  new webpack.NamedModulesPlugin(),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify('development'),

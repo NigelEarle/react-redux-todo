@@ -6,12 +6,9 @@ const baseConfig = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env', 'react'],
-          },
-        },
+        use: [
+          'babel-loader',
+        ],
       },
       {
         test: /\.(otf|woff|woff2|eot|ttf)/,
