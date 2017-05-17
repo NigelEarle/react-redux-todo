@@ -30,13 +30,13 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   passport.authenticate('local', (err, user) => {
-    if (err) return res.json({ err });
+    if (err) return res.status(500).json({ err });
 
-    if (!user) return res.json({ message: 'unauthorized' });
+    if (!user) return res.status(401).json({ message: 'unauthorized' });
 
     req.logIn(user, (error) => {
       if (err) return res.json({ error });
-      return res.json({ success: 'true' }).status(200);
+      return res.status(200).json({ id: user.id, username: user.username });
     });
   })(req, res);
 });

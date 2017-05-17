@@ -1,4 +1,4 @@
-import { AuthService } from '../services';
+import AuthService from '../services/AuthService';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
@@ -37,19 +37,19 @@ const registerFail = error => (
   }
 );
 
-
 // Async actions
-export const loginAsync = (username, password) => (
-  dispatch => (
-    AuthService.login(username, password)
+export const loginAsync = (username, password) => (dispatch) => {
+  return AuthService.login(username, password)
     .then((data) => {
-      dispatch(loginSuccess(data));
+      console.log(data);
+      // dispatch(loginSuccess(data));
     })
     .catch((err) => {
-      dispatch(loginFail(err));
-    })
-  )
-);
+      console.log(err);
+      // dispatch(loginFail(err));
+    });
+};
+
 
 export const registerAsync = (username, password) => (
   dispatch => (
