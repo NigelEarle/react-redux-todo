@@ -1,14 +1,11 @@
 const express = require('express');
-const webpack = require('webpack');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-
 const SESSION_SECRET = process.env.SESSION_SECRET || require('./server/config/session.json').secret;
-const devConfig = require('./webpack.config.development');
 const routes = require('./server/routes');
 const checkPassword = require('./server/utils/checkPassword');
 const db = require('./server/models');
@@ -20,11 +17,12 @@ const isDev = process.env.NODE_ENV !== 'production';
 const app = express();
 
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'client')));
 
 app.use(session({
   secret: SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -32,9 +30,13 @@ app.use(passport.session());
 app.use('/api', routes);
 
 if (isDev) {
+  const webpack = require('webpack');
+  const devConfig = require('./webpack.config.development');
   const compiler = webpack(devConfig);
+
   app.use(require('webpack-dev-middleware')(compiler, {
     publicPath: devConfig.output.publicPath,
+    hot: true,
     contentBase: 'client',
     stats: {
       colors: true,
@@ -48,8 +50,7 @@ if (isDev) {
   app.use(require('webpack-hot-middleware')(compiler));
   app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'index.ejs')));
 } else {
-  app.use(express.static(path.join__dirname(__dirname, '/build')));
-  app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'index.ejs')));
+  app.use(express.static(path.join(__dirname, '/build')));
 }
 
 passport.serializeUser((user, done) => {

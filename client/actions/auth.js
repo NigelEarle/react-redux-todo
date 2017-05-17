@@ -22,13 +22,11 @@ const loginFail = error => (
 );
 
 const registerSuccess = data => (
-
   {
     type: REGISTER_SUCCESS,
     data,
   }
 );
-
 
 const registerFail = error => (
   {
@@ -41,12 +39,10 @@ const registerFail = error => (
 export const loginAsync = (username, password) => (dispatch) => {
   return AuthService.login(username, password)
     .then((data) => {
-      console.log(data);
-      // dispatch(loginSuccess(data));
+      return dispatch(loginSuccess(data));
     })
-    .catch((err) => {
-      console.log(err);
-      // dispatch(loginFail(err));
+    .catch((error) => {
+      return dispatch(loginFail(error));
     });
 };
 

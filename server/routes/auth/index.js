@@ -32,7 +32,7 @@ router.post('/login', (req, res) => {
   passport.authenticate('local', (err, user) => {
     if (err) return res.status(500).json({ err });
 
-    if (!user) return res.status(401).json({ message: 'unauthorized' });
+    if (!user) return res.status(401).json({ message: 'invalid' });
 
     req.logIn(user, (error) => {
       if (err) return res.json({ error });
