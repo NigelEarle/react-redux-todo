@@ -6,7 +6,9 @@ const baseConfig = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
+        include: path.join(__dirname, 'client'),
         use: [
+          'react-hot-loader',
           'babel-loader',
         ],
       },
@@ -23,7 +25,9 @@ const baseConfig = {
     path: path.join(__dirname, '/build/'),
     fileName: 'bundle.js',
   },
-  resolve: {},
+  resolve: {
+    extensions: ['.js', '.json'],
+  },
   plugins: [],
 };
 

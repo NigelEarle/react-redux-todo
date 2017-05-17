@@ -36,8 +36,8 @@ if (isDev) {
 
   app.use(require('webpack-dev-middleware')(compiler, {
     publicPath: devConfig.output.publicPath,
-    hot: true,
     contentBase: 'client',
+    historyApiFallback: true,
     stats: {
       colors: true,
       hash: false,
@@ -48,10 +48,13 @@ if (isDev) {
     },
   }));
   app.use(require('webpack-hot-middleware')(compiler));
-  app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'index.ejs')));
 } else {
   app.use(express.static(path.join(__dirname, '/build')));
 }
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/bundle', '/index.html')); // TODO: sending document to browser
+});
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

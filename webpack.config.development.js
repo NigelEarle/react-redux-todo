@@ -7,8 +7,7 @@ const devConfig = Object.assign({}, baseConfig);
 
 devConfig.devtool = 'cheap-module-eval-source-map';
 devConfig.entry = [
-  'webpack-hot-middleware/client?reload=true',
-  'react-hot-loader/patch',
+  'webpack-hot-middleware/client',
   './client/app.js',
 ];
 
@@ -31,12 +30,12 @@ devConfig.module.rules.push(
 );
 
 devConfig.plugins.push(
+  new webpack.HotModuleReplacementPlugin(),
   new HtmlWebpackPlugin({
     template: 'client/index.ejs',
     inject: 'body',
     filename: 'index.html',
   }),
-  new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.NamedModulesPlugin(),
   new webpack.DefinePlugin({
