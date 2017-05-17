@@ -46,10 +46,10 @@ if (isDev) {
     },
   }));
   app.use(require('webpack-hot-middleware')(compiler));
-  app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'index.html')));
+  app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'index.ejs')));
 } else {
   app.use(express.static(path.join__dirname(__dirname, '/build')));
-  app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'index.html')));
+  app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'index.ejs')));
 }
 
 passport.serializeUser((user, done) => {
