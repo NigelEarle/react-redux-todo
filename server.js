@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 app.use(session({
   secret: SESSION_SECRET,
-  resave: true,
+  resave: false,
   saveUninitialized: true,
 }));
 app.use(passport.initialize());
@@ -67,7 +67,11 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(new LocalStrategy((username, password, done) => {
-  User.findOne({ where: { username } })
+  User.findOne({
+    where: {
+      username,
+    },
+  })
   .then((user) => {
     if (!user) {
       return done(null, false);
