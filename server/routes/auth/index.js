@@ -28,9 +28,17 @@ router.post('/register', (req, res) => {
   });
 });
 
-router.post('/login', passport.authenticate('local'),
-  (req, res) => {
-    res.json({ success: true }).status(200);
-  });
+router.post('/login', (req, res) => {
+  passport.authenticate('local', (err, user) => {
+    if (err) return res.json({ err });
+
+    if (!user) return res.json({ message: 'unauthorized' });
+
+    req.logIn(user, (error) => {
+      if (err) return res.json({ error });
+      return res.json({ success: 'true' }).status(200);
+    });
+  })(req, res);
+});
 
 module.exports = router;
