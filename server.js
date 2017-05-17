@@ -1,5 +1,6 @@
 const express = require('express');
 const webpack = require('webpack');
+const bodyParser = require('body-parser');
 const path = require('path');
 const devConfig = require('./webpack.config.development');
 const routes = require('./server/routes');
@@ -10,6 +11,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use('/api', routes);
 
 if (isDev) {
