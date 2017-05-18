@@ -1,8 +1,16 @@
 const express = require('express');
 const { Todo } = require('../../models');
+
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ message: 'unauthorized' });
+};
+
+router.get('/:id', isAuthenticated, (req, res) => {
   const { id } = req.params;
   Todo.findAll({
     where: {
@@ -18,7 +26,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', isAuthenticated, (req, res) => {
   const {
     title,
     isComplete,
@@ -32,7 +40,7 @@ router.post('/', (req, res) => {
   };
 
   Todo.create(todo)
-  .then(result => {
+  .then((result) => {
     res.send('hello');
   });
 });

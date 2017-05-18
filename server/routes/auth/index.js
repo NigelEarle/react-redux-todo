@@ -21,10 +21,16 @@ router.post('/register', (req, res) => {
     return User.create(user);
   })
   .then((result) => {
-    res.json({ result: result.dataValues });
+    req.logIn(result.dataValues, (error) => {
+      if (error) return res.status(500).json({ error });
+      res.status(200).json({
+        id: result.dataValues.id,
+        username: result.dataValues.username,
+      });
+    });
   })
-  .catch((err) => {
-    res.json({ err });
+  .catch((error) => {
+    res.status(400).json({ error: error.errors[0].message });
   });
 });
 

@@ -38,23 +38,13 @@ const registerFail = error => (
 // Async actions
 export const loginAsync = (username, password) => (dispatch) => {
   return AuthService.login(username, password)
-    .then((data) => {
-      return dispatch(loginSuccess(data));
-    })
-    .catch((error) => {
-      return dispatch(loginFail(error));
-    });
+    .then(data => dispatch(loginSuccess(data.data)))
+    .catch(error => dispatch(loginFail(error)));
 };
 
 
-export const registerAsync = (username, password) => (
-  dispatch => (
-    AuthService.register(username, password)
-    .then((data) => {
-      dispatch(registerSuccess(data));
-    })
-    .catch((err) => {
-      dispatch(registerFail(err));
-    })
-  )
-);
+export const registerAsync = (username, password) => (dispatch) => {
+  return AuthService.register(username, password)
+    .then(data => dispatch(registerSuccess(data.data)))
+    .catch(error => dispatch(registerFail(error)));
+};

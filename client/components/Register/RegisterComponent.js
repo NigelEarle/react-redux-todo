@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginAsync } from '../../actions/auth';
+import { registerAsync } from '../../actions/auth';
 
-class LoginComponent extends Component {
+class RegisterComponent extends Component {
   constructor(props) {
     super(props);
-    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
   }
 
-  handleLoginSubmit(event) {
+  handleRegisterSubmit(event) {
     event.preventDefault();
     const { username, password } = this;
-    this.props.loginAsync(username.value, password.value);
+    this.props.registerAsync(username.value, password.value);
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="loginContainer">
-        <h1>Login</h1>
-        <form onSubmit={this.handleLoginSubmit} className="loginForm">
+        <h1>Register</h1>
+        <form onSubmit={this.handleRegisterSubmit} className="loginForm">
           <input
             type="text"
             ref={input => this.username = input}
@@ -39,12 +40,12 @@ class LoginComponent extends Component {
   }
 }
 
-LoginComponent.defaultProps = {
-  loginAsync: () => {},
+RegisterComponent.defaultProps = {
+  registerAsync: () => {},
 };
 
-LoginComponent.propTypes = {
-  loginAsync: PropTypes.func.isRequired,
+RegisterComponent.propTypes = {
+  registerAsync: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => (
@@ -54,5 +55,5 @@ const mapStateToProps = state => (
 );
 
 export default connect(mapStateToProps, {
-  loginAsync,
-})(LoginComponent);
+  registerAsync,
+})(RegisterComponent);

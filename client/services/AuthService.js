@@ -15,7 +15,7 @@ const logout = () => {};
 
 const register = (username, password) => {
   return xhrReq({
-    path: 'auth/register',
+    path: '/auth/register',
     method: 'POST',
     body: {
       username,

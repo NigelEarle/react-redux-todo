@@ -16,32 +16,35 @@ const initialState = {
 export const auth = (state = initialState, action = {}) => {
   switch (action.type) {
   case LOGIN_SUCCESS:
+
     return {
-      ...state,
       error: '',
       user: {
-        id: action.data.data.id,
-        username: action.data.data.username,
+        id: action.data.id,
+        username: action.data.username,
       },
 
     };
   case LOGIN_FAIL:
+
     return {
       ...state,
       error: action.error,
     };
   case REGISTER_SUCCESS:
+
     return {
-      ...state,
+      error: '',
       user: {
         id: action.data.id,
         username: action.data.username,
       },
     };
   case REGISTER_FAIL:
+
     return {
-      error: action.err,
       ...state,
+      error: action.error,
     };
   default:
     return state;
