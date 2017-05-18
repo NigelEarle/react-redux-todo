@@ -26,26 +26,58 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
-  const {
-    title,
-    isComplete,
-    UserId,
-  } = req.body;
+router.route('/')
+  .post((req, res) => {
+    const {
+      title,
+      isComplete,
+      UserId,
+    } = req.body;
 
-  const todo = {
-    title,
-    isComplete,
-    UserId,
-  };
+    const todo = {
+      title,
+      isComplete,
+      UserId,
+    };
 
-  Todo.create(todo)
-  .then((result) => {
-    res.status(200).json({ data: result.dataValues });
+    Todo.create(todo)
+    .then((result) => {
+      res.status(200).json({ data: result.dataValues });
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
   })
-  .catch((error) => {
-    res.status(200).json({ error });
+  .put((req, res) => {
+    const {
+      id,
+      title,
+      isComplete,
+    } = req.body;
+
+    const updateTodo = {
+      title,
+      isComplete,
+    };
+
+    Todo.update(
+      updateTodo,
+      {
+        where: { id },
+      })
+    .then(([result]) => {
+      if (result === 1) {
+        return Todo.findOne({
+          where: { id },
+        });
+      }
+    })
+    .then((data) => {
+      res.status(200).json({ data: data.dataValues });
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
   });
-});
 
 module.exports = router;
