@@ -47,4 +47,9 @@ router.post('/login', (req, res) => {
   })(req, res);
 });
 
+router.delete('/logout', (req, res) => {
+  req.logout();
+  res.status(200).json({ success: true });
+});
+
 module.exports = router;

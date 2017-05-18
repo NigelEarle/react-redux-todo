@@ -16,7 +16,6 @@ class RegisterComponent extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="loginContainer">
         <h1>Register</h1>

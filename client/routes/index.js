@@ -4,7 +4,6 @@ import {
   BrowserRouter,
   Route,
   Switch,
-  Link,
 } from 'react-router-dom';
 
 import {
@@ -12,14 +11,13 @@ import {
   TodoComponent,
   NotFoundComponent,
   RegisterComponent,
+  HeaderComponent,
 } from '../components';
 
 const TodoRouter = () => (
   <BrowserRouter>
     <div className="router">
-      <div><Link to="/">Home</Link></div>
-      <div><Link to="/login">Login</Link></div>
-      <div><Link to="/register">Register</Link></div>
+      <HeaderComponent />
       <Switch>
         <Route exact path="/" component={TodoComponent} />
         <Route path="/login" component={LoginComponent} />

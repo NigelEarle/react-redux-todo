@@ -1,6 +1,8 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
 } from '../actions/auth';
@@ -26,6 +28,20 @@ export const auth = (state = initialState, action = {}) => {
 
     };
   case LOGIN_FAIL:
+
+    return {
+      ...state,
+      error: action.error,
+    };
+
+  case LOGOUT_SUCCESS:
+
+    return {
+      error: '',
+      user: {},
+    };
+
+  case LOGOUT_FAIL:
 
     return {
       ...state,

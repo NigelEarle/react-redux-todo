@@ -11,7 +11,12 @@ const login = (username, password) => {
   });
 };
 
-const logout = () => {};
+const logout = () => {
+  return xhrReq({
+    path: '/auth/logout',
+    method: 'DELETE',
+  });
+};
 
 const register = (username, password) => {
   return xhrReq({
