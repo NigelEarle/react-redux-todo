@@ -26,22 +26,25 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', isAuthenticated, (req, res) => {
+router.post('/', (req, res) => {
   const {
     title,
     isComplete,
-    userId,
+    UserId,
   } = req.body;
 
   const todo = {
     title,
     isComplete,
-    UserId: userId,
+    UserId,
   };
 
   Todo.create(todo)
   .then((result) => {
-    res.send('hello');
+    res.status(200).json({ data: result.dataValues });
+  })
+  .catch((error) => {
+    res.status(200).json({ error });
   });
 });
 

@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchTodosAsync } from '../../actions/todo';
+import { fetchTodosAsync, addTodoAsync } from '../../actions/todo';
+import { TodoItemComponent } from '../../components';
 
 class TodoComponent extends Component {
   constructor(props) {
     super(props);
+    this.handleTodoChange = this.handleTodoChange.bind(this);
+    this.handleTodoSubmit = this.handleTodoSubmit.bind(this);
+
+    this.state = {
+      title: '',
+    };
   }
 
   componentDidMount() {
@@ -13,35 +20,68 @@ class TodoComponent extends Component {
     this.props.fetchTodosAsync(user.id);
   }
 
+  handleTodoChange(event) {
+    const { value } = event.target;
+    this.setState({ title: value });
+  }
+
+  handleTodoSubmit(event) {
+    if (event.charCode === 13) {
+      const { title } = this.state;
+      const { user } = this.props;
+      const payload = {
+        title,
+        isComplete: false,
+        UserId: user.id,
+      };
+
+      this.props.addTodoAsync(payload);
+      this.setState({ title: '' });
+    }
+  }
+
   render() {
-    console.log(this.props);
+    const { title } = this.state;
+    const { todos } = this.props;
     return (
-      <div>
-        <h1>Todo Component</h1>
+      <div className="todoContainer">
+        <h1>React Redux Todo</h1>
+        <input
+          type="text"
+          onChange={this.handleTodoChange}
+          onKeyPress={this.handleTodoSubmit}
+          value={title}
+        />
+        <ul>
+          {todos.map(todo => <TodoItemComponent key={todo.id} title={todo.title} complete={todo.isComplete} created={todo.createdAt} />)}
+        </ul>
       </div>
     );
   }
 }
 
 TodoComponent.defaultProps = {
-  fetchTodosAsync: () => {},
   user: {},
   todos: [],
+  fetchTodosAsync: () => {},
+  addTodoAsync: () => {},
 };
 
 TodoComponent.propTypes = {
-  fetchTodosAsync: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  // todos: PropTypes.shape.isRequired,
+  todos: PropTypes.array.isRequired,
+  fetchTodosAsync: PropTypes.func.isRequired,
+  addTodoAsync: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => (
   {
     user: state.auth.user,
-    todos: state.todo,
+    todos: state.todo.todos,
   }
 );
 
 export default connect(mapStateToProps, {
   fetchTodosAsync,
+  addTodoAsync,
 })(TodoComponent);

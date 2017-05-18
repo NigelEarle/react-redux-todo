@@ -10,6 +10,7 @@ import {
 } from '../actions/todo';
 
 const initialState = {
+  error: '',
   todos: [],
 };
 
@@ -22,13 +23,23 @@ export const todo = (state = initialState, action = {}) => {
     };
   case FETCH_TODOS_FAIL:
 
-    return {};
+    return {
+      ...state,
+      error: action.error,
+    };
   case ADD_TODO_SUCCESS:
 
-    return {};
+    return {
+      ...state,
+      error: '',
+      todos: state.todos.concat(action.data),
+    };
   case ADD_TODO_FAIL:
 
-    return {};
+    return {
+      ...state,
+      error: action.error,
+    };
   case UPDATE_TODO_SUCCESS:
 
     return {};

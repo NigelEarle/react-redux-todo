@@ -7,7 +7,9 @@ const fetchTodos = (id) => {
 };
 const addTodo = (data) => {
   return xhrReq({
-
+    path: `/todo`,
+    method: 'POST',
+    body: data,
   });
 };
 const updateTodo = (data) => {

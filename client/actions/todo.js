@@ -75,8 +75,8 @@ export const fetchTodosAsync = id => (dispatch) => {
 };
 
 export const addTodoAsync = todo => (dispatch) => {
-  return TodoService.addTodos(todo)
-    .then(data => dispatch(addTodoSuccess(data)))
+  return TodoService.addTodo(todo)
+    .then(data => dispatch(addTodoSuccess(data.data.data)))
     .catch(error => dispatch(addTodoFail(error)));
 };
 
