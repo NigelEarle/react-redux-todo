@@ -14,21 +14,27 @@ const initialState = {
   todos: [],
 };
 
-const findAndReplace = (state, data) => {
-  const todoCopy = state.todos.slice();
-  todoCopy.forEach((curr, idx) => {
+const findAndReplace = (data, state) => {
+  const todosCopy = state.todos.slice();
+  todosCopy.forEach((curr, idx) => {
     if (curr.id === data.id) {
-      todoCopy.splice(idx, 1, data);
+      todosCopy.splice(idx, 1, data);
     }
   });
-  return todoCopy;
+  return todosCopy;
+};
+
+const deleteTodo = (id, state) => {
+  return state.todos.filter(curr => curr.id !== id);
 };
 
 export const todo = (state = initialState, action = {}) => {
   switch (action.type) {
   case FETCH_TODOS_SUCCESS:
+
     return {
       ...state,
+      error: '',
       todos: action.data,
     };
   case FETCH_TODOS_FAIL:
@@ -51,21 +57,31 @@ export const todo = (state = initialState, action = {}) => {
       error: action.error,
     };
   case UPDATE_TODO_SUCCESS:
+
     return {
       ...state,
-      todos: findAndReplace(state, action.data),
+      error: '',
+      todos: findAndReplace(action.data, state),
     };
   case UPDATE_TODO_FAIL:
+
     return {
       ...state,
       error: action.error,
     };
   case DELETE_TODO_SUCCESS:
 
-    return {};
+    return {
+      ...state,
+      error: '',
+      todos: deleteTodo(action.id, state),
+    };
   case DELETE_TODO_FAIL:
 
-    return {};
+    return {
+      ...state,
+      error: action.error,
+    };
   default:
     return state;
   }

@@ -80,4 +80,21 @@ router.route('/')
     });
   });
 
+router.delete('/delete/:id', (req, res) => {
+  const { id } = req.params;
+  Todo.destroy({
+    where: {
+      id,
+    },
+  })
+  .then((result) => {
+    if (result === 1) {
+      res.status(200).json({ success: true });
+    }
+  })
+  .catch((error) => {
+    res.status(400).json({ error });
+  });
+});
+
 module.exports = router;

@@ -8,6 +8,7 @@ class TodoItemComponent extends Component {
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleCompleteUpdate = this.handleCompleteUpdate.bind(this);
     this.handleEditing = this.handleEditing.bind(this);
+    this.handleDeleteTodo = this.handleDeleteTodo.bind(this);
 
     const { title, isComplete, id } = this.props;
     this.state = {
@@ -54,6 +55,11 @@ class TodoItemComponent extends Component {
     this.setState({ isEditing: !isEditing });
   }
 
+  handleDeleteTodo() {
+    const { todo } = this.state;
+    this.props.delete(todo.id);
+  }
+
   render() {
     const { isEditing, todo } = this.state;
     return (
@@ -82,6 +88,7 @@ class TodoItemComponent extends Component {
           checked={todo.isComplete}
           onChange={this.handleCompleteUpdate}
         />
+        <button type="button" onClick={this.handleDeleteTodo}>Delete</button>
       </li>
     );
   }
@@ -94,6 +101,7 @@ TodoItemComponent.defaultProps = {
   isComplete: null,
   created: '',
   update: () => {},
+  delete: () => {},
 };
 
 TodoItemComponent.propTypes = {
@@ -102,6 +110,7 @@ TodoItemComponent.propTypes = {
   isComplete: PropTypes.bool,
   created: PropTypes.string,
   update: PropTypes.func,
+  delete: PropTypes.func,
 };
 
 export default TodoItemComponent;

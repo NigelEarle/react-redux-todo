@@ -53,10 +53,10 @@ const updateTodoFail = error => (
   }
 );
 
-const deleteTodoSuccess = data => (
+const deleteTodoSuccess = id => (
   {
     type: DELETE_TODO_SUCCESS,
-    data,
+    id,
   }
 );
 
@@ -86,8 +86,8 @@ export const updateTodoAsync = todo => (dispatch) => {
     .catch(error => dispatch(updateTodoFail(error)));
 };
 
-export const deleteTodoAsync = todo => (dispatch) => {
-  return TodoService.deleteTodo(todo)
-    .then(() => dispatch(deleteTodoSuccess()))
+export const deleteTodoAsync = (id) => (dispatch) => {
+  return TodoService.deleteTodo(id)
+    .then(() => dispatch(deleteTodoSuccess(id)))
     .catch(error => dispatch(deleteTodoFail(error)));
 };

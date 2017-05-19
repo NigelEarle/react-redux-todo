@@ -5,6 +5,7 @@ import {
   fetchTodosAsync,
   addTodoAsync,
   updateTodoAsync,
+  deleteTodoAsync,
 } from '../../actions/todo';
 
 import { TodoItemComponent } from '../../components';
@@ -66,6 +67,7 @@ class TodoComponent extends Component {
               isComplete={todo.isComplete}
               created={todo.createdAt}
               update={this.props.updateTodoAsync}
+              delete={this.props.deleteTodoAsync}
             />
           ))
           }
@@ -81,6 +83,7 @@ TodoComponent.defaultProps = {
   fetchTodosAsync: () => {},
   addTodoAsync: () => {},
   updateTodoAsync: () => {},
+  deleteTodoAsync: () => {},
 };
 
 TodoComponent.propTypes = {
@@ -89,6 +92,7 @@ TodoComponent.propTypes = {
   fetchTodosAsync: PropTypes.func.isRequired,
   addTodoAsync: PropTypes.func.isRequired,
   updateTodoAsync: PropTypes.func.isRequired,
+  deleteTodoAsync: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => (
@@ -102,4 +106,5 @@ export default connect(mapStateToProps, {
   fetchTodosAsync,
   addTodoAsync,
   updateTodoAsync,
+  deleteTodoAsync,
 })(TodoComponent);
