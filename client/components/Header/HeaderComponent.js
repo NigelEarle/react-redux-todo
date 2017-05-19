@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutAsync } from '../../actions/auth';
-
+import './HeaderComponent.scss';
 
 class HeaderComponent extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class HeaderComponent extends Component {
 
   render() {
     return (
-      <div className="loginContainer">
+      <div className="headerContainer">
         <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>

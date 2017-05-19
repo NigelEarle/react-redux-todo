@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginAsync } from '../../actions/auth';
+import './LoginComponent.scss';
 
 class LoginComponent extends Component {
   constructor(props) {
