@@ -38,7 +38,7 @@ class LoginComponent extends Component {
             />
           </div>
           <div className="inputContainer">
-            <input type="submit" className="submit" />
+            <input type="submit" className="submit" value="Log In" />
           </div>
         </form>
       </div>
