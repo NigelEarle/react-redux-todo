@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import dateFormat from 'dateformat';
+
+import './TodoItemComponent.scss';
 
 class TodoItemComponent extends Component {
   constructor(props) {
@@ -9,6 +12,7 @@ class TodoItemComponent extends Component {
     this.handleCompleteUpdate = this.handleCompleteUpdate.bind(this);
     this.handleEditing = this.handleEditing.bind(this);
     this.handleDeleteTodo = this.handleDeleteTodo.bind(this);
+    this.parseTime = this.parseTime.bind(this);
 
     const { title, isComplete, id } = this.props;
     this.state = {
@@ -60,20 +64,27 @@ class TodoItemComponent extends Component {
     this.props.delete(todo.id);
   }
 
+  parseTime() {
+    const { created } = this.props;
+    return dateFormat(created, 'dddd, mmmm dS, yyyy');
+  }
+
   render() {
     const { isEditing, todo } = this.state;
     return (
-      <li>
+      <li className="todoItemContainer">
         { isEditing ?
           <input
             type="text"
+            className="editTitle"
             onChange={this.handleTitleChange}
             onKeyPress={this.handleUpdateEnter}
             defaultValue={todo.title}
+            autoFocus
           />
-          : <h3>{this.props.title}</h3>
+          : <h2 className="todoTitle">{this.state.todo.title}</h2>
         }
-        <h4>{this.props.created}</h4>
+        <p className="dateCreated">{this.parseTime()}</p>
         <label htmlFor="edit">Edit</label>
         <input
           type="checkbox"

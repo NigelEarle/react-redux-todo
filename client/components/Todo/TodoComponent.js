@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkSession } from '../../utils/authorized';
+import './TodoComponent.scss';
+
 import {
   fetchTodosAsync,
   addTodoAsync,
@@ -59,14 +61,16 @@ class TodoComponent extends Component {
   renderTodos(todos, title) {
     return (
       <div>
-        <h1>React Redux Todo</h1>
+        <h1 className="title">React Redux Todo</h1>
         <input
           type="text"
+          className="addTodo"
           onChange={this.handleTodoChange}
           onKeyPress={this.handleAddTodo}
           value={title}
+          placeholder="Add Todo"
         />
-        <ul>
+        <ul className="todoList">
           {todos.map(todo => (
             <TodoItemComponent
               key={todo.id}
@@ -85,7 +89,6 @@ class TodoComponent extends Component {
   }
 
   render() {
-
     const { title, isLoggedIn } = this.state;
     const { todos } = this.props;
 

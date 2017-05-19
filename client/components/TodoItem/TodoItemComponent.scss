@@ -1,0 +1,27 @@
+.todoItemContainer {
+  border: 1px solid #DCDCDC;
+  background-color: #F0F0F0;
+  border-radius: 3px 3px 0 0;
+  border-bottom: none;
+  padding: 8px;
+  .todoTitle{
+    line-height: 1.5;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  .dateCreated {
+    font-size: .9rem;
+    opacity: .7;
+    margin-bottom: 5px;
+  }
+  .editTitle {
+    border: none;
+    margin-bottom: 7px;
+    font-size: 1.5rem;
+    border-radius: 2px;
+  }
+}
+
+.todoItemContainer:last-of-type {
+  border-radius: 0 0 3px 3px;
+}
