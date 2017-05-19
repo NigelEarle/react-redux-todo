@@ -42,9 +42,18 @@ router.post('/login', (req, res) => {
 
     req.logIn(user, (error) => {
       if (err) return res.json({ error });
+
       return res.status(200).json({ id: user.id, username: user.username });
     });
   })(req, res);
+});
+
+router.get('/session', (req, res) => {
+  if (req.user) {
+    return res.status(200).json({ status: 'authorized' });
+  } else {
+    return res.status(401).json({ status: 'unauthorized' });
+  }
 });
 
 router.delete('/logout', (req, res) => {

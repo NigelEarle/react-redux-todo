@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutAsync } from '../../actions/auth';
 
+
 class HeaderComponent extends Component {
   constructor(props) {
     super(props);

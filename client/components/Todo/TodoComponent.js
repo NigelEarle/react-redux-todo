@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { checkSession } from '../../utils/authorized';
 import {
   fetchTodosAsync,
   addTodoAsync,
@@ -15,15 +17,23 @@ class TodoComponent extends Component {
     super(props);
     this.handleTodoChange = this.handleTodoChange.bind(this);
     this.handleAddTodo = this.handleAddTodo.bind(this);
+    this.renderTodos = this.renderTodos.bind(this);
 
     this.state = {
       title: '',
+      isLoggedIn: true,
     };
   }
 
   componentDidMount() {
-    const { user } = this.props;
-    this.props.fetchTodosAsync(user.id);
+    checkSession()
+    .then(() => {
+      const { user } = this.props;
+      this.props.fetchTodosAsync(user.id);
+    })
+    .catch(() => {
+      this.setState({ isLoggedIn: false });
+    });
   }
 
   handleTodoChange(event) {
@@ -46,11 +56,9 @@ class TodoComponent extends Component {
     }
   }
 
-  render() {
-    const { title } = this.state;
-    const { todos } = this.props;
+  renderTodos(todos, title) {
     return (
-      <div className="todoContainer">
+      <div>
         <h1>React Redux Todo</h1>
         <input
           type="text"
@@ -72,6 +80,21 @@ class TodoComponent extends Component {
           ))
           }
         </ul>
+      </div>
+    );
+  }
+
+  render() {
+
+    const { title, isLoggedIn } = this.state;
+    const { todos } = this.props;
+
+    return (
+      <div className="todoContainer">
+        { !isLoggedIn ?
+          <Redirect to="/login" />
+          : this.renderTodos(todos, title)
+        }
       </div>
     );
   }
