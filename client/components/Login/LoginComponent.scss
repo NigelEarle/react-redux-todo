@@ -1,0 +1,46 @@
+.loginContainer {
+  margin-top: 40px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .loginTitle {
+    margin-bottom: 35px;
+    line-height: 1.5;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #000080;
+  }
+  .loginForm {
+    width: 35%;
+    .inputContainer {
+      .input {
+        width: 100%;
+        height: 50px;
+        margin-bottom: 20px;
+        padding-left: 5px;
+        border: none;
+        font-size: 1.5rem;
+        border-radius: 2px;
+      }
+
+      .input::placeholder {
+        font-style: italic;
+        color: #c6c6c6;
+      }
+      .submit {
+        width: 100%;
+        height: 40px;
+        margin-left: 2px;
+        background-color: #32CD32;
+        color: white;
+        font-size: 1.5rem;
+        outline: none;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
