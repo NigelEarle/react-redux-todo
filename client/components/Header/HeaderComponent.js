@@ -18,10 +18,18 @@ class HeaderComponent extends Component {
   render() {
     return (
       <div className="headerContainer">
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-        <a href="#" onClick={this.handleLogout}>Logout</a>
+        <div className="linkContainer">
+          <Link to="/" className="link">Home</Link>
+        </div>
+        <div className="linkContainer">
+          <Link to="/login" className="link">Login</Link>
+        </div>
+        <div className="linkContainer">
+          <Link to="/register" className="link">Register</Link>
+        </div>
+        <div className="linkContainer">
+          <Link to="/login" className="link" onClick={this.handleLogout}>Logout</Link>
+        </div>
       </div>
     );
   }
