@@ -8,7 +8,13 @@
     line-height: 1.5;
     font-size: 1.5rem;
     font-weight: 700;
+    &.isComplete {
+      text-decoration: line-through;
+      opacity: .4;
+    }
   }
+  
+
   .dateCreated {
     font-size: .9rem;
     opacity: .7;

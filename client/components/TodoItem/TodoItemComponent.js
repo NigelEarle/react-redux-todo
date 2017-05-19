@@ -82,7 +82,13 @@ class TodoItemComponent extends Component {
             defaultValue={todo.title}
             autoFocus
           />
-          : <h2 className="todoTitle">{this.state.todo.title}</h2>
+          : <h2
+              className={todo.isComplete
+                ? ['todoTitle', 'isComplete'].join(' ')
+                : 'todoTitle'
+              }>
+              {todo.title}
+            </h2>
         }
         <p className="dateCreated">{this.parseTime()}</p>
         <label htmlFor="edit">Edit</label>
