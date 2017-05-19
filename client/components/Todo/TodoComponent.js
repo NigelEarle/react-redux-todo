@@ -61,6 +61,7 @@ class TodoComponent extends Component {
           {todos.map(todo => (
             <TodoItemComponent
               key={todo.id}
+              id={todo.id}
               title={todo.title}
               isComplete={todo.isComplete}
               created={todo.createdAt}

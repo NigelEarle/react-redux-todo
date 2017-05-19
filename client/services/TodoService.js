@@ -7,19 +7,23 @@ const fetchTodos = (id) => {
 };
 const addTodo = (data) => {
   return xhrReq({
-    path: `/todo`,
+    path: '/todo',
     method: 'POST',
     body: data,
   });
 };
 const updateTodo = (data) => {
   return xhrReq({
-
+    path: '/todo',
+    method: 'PUT',
+    body: data,
   });
 };
-const completeTodo = () => {
-  return xhrReq({
 
+const deleteTodo = (id) => {
+  return xhrReq({
+    path: `/todo/delete/${id}`,
+    method: 'DELETE',
   });
 };
 
@@ -27,7 +31,7 @@ const TodoService = {
   fetchTodos,
   addTodo,
   updateTodo,
-  completeTodo,
+  deleteTodo,
 };
 
 export default TodoService;

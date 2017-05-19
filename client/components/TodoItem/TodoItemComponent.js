@@ -9,11 +9,11 @@ class TodoItemComponent extends Component {
     this.handleCompleteUpdate = this.handleCompleteUpdate.bind(this);
     this.handleEditing = this.handleEditing.bind(this);
 
-    const { title, isComplete } = this.props;
-
+    const { title, isComplete, id } = this.props;
     this.state = {
       isEditing: false,
       todo: {
+        id,
         title,
         isComplete,
       },
@@ -89,6 +89,7 @@ class TodoItemComponent extends Component {
 
 
 TodoItemComponent.defaultProps = {
+  id: null,
   title: '',
   isComplete: null,
   created: '',
@@ -96,6 +97,7 @@ TodoItemComponent.defaultProps = {
 };
 
 TodoItemComponent.propTypes = {
+  id: PropTypes.number,
   title: PropTypes.string,
   isComplete: PropTypes.bool,
   created: PropTypes.string,
