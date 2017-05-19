@@ -82,8 +82,12 @@ export const addTodoAsync = todo => (dispatch) => {
 
 export const updateTodoAsync = todo => (dispatch) => {
   return TodoService.updateTodo(todo)
-    .then(() => dispatch(updateTodoSuccess()))
-    .catch(error => dispatch(updateTodoFail(error)));
+    .then((result) => {
+      dispatch(updateTodoSuccess(result));
+    })
+    .catch(error => {
+      dispatch(updateTodoFail(error));
+    });
 };
 
 export const completeTodoAsync = todo => (dispatch) => {

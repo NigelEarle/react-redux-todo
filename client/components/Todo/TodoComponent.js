@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchTodosAsync, addTodoAsync } from '../../actions/todo';
+import {
+  fetchTodosAsync,
+  addTodoAsync,
+  updateTodoAsync,
+} from '../../actions/todo';
+
 import { TodoItemComponent } from '../../components';
 
 class TodoComponent extends Component {
   constructor(props) {
     super(props);
     this.handleTodoChange = this.handleTodoChange.bind(this);
-    this.handleTodoSubmit = this.handleTodoSubmit.bind(this);
+    this.handleAddTodo = this.handleAddTodo.bind(this);
 
     this.state = {
       title: '',
@@ -25,7 +30,7 @@ class TodoComponent extends Component {
     this.setState({ title: value });
   }
 
-  handleTodoSubmit(event) {
+  handleAddTodo(event) {
     if (event.charCode === 13) {
       const { title } = this.state;
       const { user } = this.props;
@@ -49,11 +54,20 @@ class TodoComponent extends Component {
         <input
           type="text"
           onChange={this.handleTodoChange}
-          onKeyPress={this.handleTodoSubmit}
+          onKeyPress={this.handleAddTodo}
           value={title}
         />
         <ul>
-          {todos.map(todo => <TodoItemComponent key={todo.id} title={todo.title} complete={todo.isComplete} created={todo.createdAt} />)}
+          {todos.map(todo => (
+            <TodoItemComponent
+              key={todo.id}
+              title={todo.title}
+              isComplete={todo.isComplete}
+              created={todo.createdAt}
+              update={this.props.updateTodoAsync}
+            />
+          ))
+          }
         </ul>
       </div>
     );
@@ -65,6 +79,7 @@ TodoComponent.defaultProps = {
   todos: [],
   fetchTodosAsync: () => {},
   addTodoAsync: () => {},
+  updateTodoAsync: () => {},
 };
 
 TodoComponent.propTypes = {
@@ -72,6 +87,7 @@ TodoComponent.propTypes = {
   todos: PropTypes.array.isRequired,
   fetchTodosAsync: PropTypes.func.isRequired,
   addTodoAsync: PropTypes.func.isRequired,
+  updateTodoAsync: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => (
@@ -84,4 +100,5 @@ const mapStateToProps = state => (
 export default connect(mapStateToProps, {
   fetchTodosAsync,
   addTodoAsync,
+  updateTodoAsync,
 })(TodoComponent);
