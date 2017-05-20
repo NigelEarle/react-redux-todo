@@ -38,7 +38,16 @@ Create `config/config.json` in `/server` directory. Add the following to connect
     "dialect": "mysql"
   }
 }
+```
 
+**Session Config**
+
+Create `config/session.json` in `/server` directory and add the following to create a user session cookie...
+
+```
+{
+  "secret": "mysecretkey",
+}
 ```
 
 #### Run Application
@@ -50,11 +59,11 @@ Create `config/config.json` in `/server` directory. Add the following to connect
 
 ---
 
-### Things To Complete / Inconsistencies
+### Things To Complete
 
-* Error handling/messages to user when login or registration fails.
-* Error handling/message to user when navigating `/`.
-* Restrict access to `/login` and `/register` pages if user is already logged in.
+* Conditionally display header links if user is authenticated.
+* Error handling/message to user when login or registration input invalid.
+* Redirect authenticated user to `/` if trying to access `/login` or `/register` routes.
 * Fix error on refresh `/login` and `/register` routes.
 * Add `Jest` front-end unit tests and `Supertest` back-end API endpoint tests.
 
