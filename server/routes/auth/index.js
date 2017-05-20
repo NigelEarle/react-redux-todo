@@ -24,7 +24,6 @@ router.post('/register', (req, res) => {
     req.logIn(result.dataValues, (error) => {
       if (error) return res.status(500).json({ error });
       res.status(200).json({
-        id: result.dataValues.id,
         username: result.dataValues.username,
       });
     });
@@ -43,7 +42,7 @@ router.post('/login', (req, res) => {
     req.logIn(user, (error) => {
       if (err) return res.json({ error });
 
-      return res.status(200).json({ id: user.id, username: user.username });
+      return res.status(200).json({ username: user.username });
     });
   })(req, res);
 });

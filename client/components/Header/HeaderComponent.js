@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutAsync } from '../../actions/auth';
-import { checkSession } from '../../utils/authorized';
 import './HeaderComponent.scss';
 
+// TODO: Persist logged in user to conditionally set user
 class HeaderComponent extends Component {
   constructor(props) {
     super(props);
@@ -38,15 +38,17 @@ class HeaderComponent extends Component {
 
 HeaderComponent.defaultProps = {
   logoutAsync: () => {},
+  user: {},
 };
 
 HeaderComponent.propTypes = {
   logoutAsync: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => (
   {
-    auth: state.auth,
+    user: state.auth.user,
   }
 );
 

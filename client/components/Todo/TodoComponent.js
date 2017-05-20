@@ -46,11 +46,10 @@ class TodoComponent extends Component {
   handleAddTodo(event) {
     if (event.charCode === 13) {
       const { title } = this.state;
-      const { user } = this.props;
+
       const payload = {
         title,
         isComplete: false,
-        UserId: user.id,
       };
 
       this.props.addTodoAsync(payload);
@@ -68,7 +67,7 @@ class TodoComponent extends Component {
           onChange={this.handleTodoChange}
           onKeyPress={this.handleAddTodo}
           value={title}
-          placeholder="Add Todo"
+          placeholder="Create A Todo"
         />
         <ul className="todoList">
           {todos.map(todo => (
@@ -105,7 +104,6 @@ class TodoComponent extends Component {
 }
 
 TodoComponent.defaultProps = {
-  user: {},
   todos: [],
   fetchTodosAsync: () => {},
   addTodoAsync: () => {},
@@ -114,7 +112,6 @@ TodoComponent.defaultProps = {
 };
 
 TodoComponent.propTypes = {
-  user: PropTypes.object.isRequired,
   todos: PropTypes.array.isRequired,
   fetchTodosAsync: PropTypes.func.isRequired,
   addTodoAsync: PropTypes.func.isRequired,
@@ -124,7 +121,6 @@ TodoComponent.propTypes = {
 
 const mapStateToProps = state => (
   {
-    user: state.auth.user,
     todos: state.todo.todos,
   }
 );

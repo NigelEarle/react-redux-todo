@@ -10,7 +10,6 @@ import {
 const initialState = {
   error: null,
   user: {
-    id: null,
     username: '',
   },
 };
@@ -22,7 +21,6 @@ export const auth = (state = initialState, action = {}) => {
     return {
       error: '',
       user: {
-        id: action.data.id,
         username: action.data.username,
       },
 
@@ -52,7 +50,6 @@ export const auth = (state = initialState, action = {}) => {
     return {
       error: '',
       user: {
-        id: action.data.id,
         username: action.data.username,
       },
     };

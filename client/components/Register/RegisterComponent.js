@@ -9,15 +9,36 @@ class RegisterComponent extends Component {
   constructor(props) {
     super(props);
     this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.state = {
+      username: '',
+      password: '',
+    };
+  }
+
+  componentDidUpdate() {
+    const { user } = this.props;
+    if (user.username) {
+      this.props.history.push('/');
+    }
   }
 
   handleRegisterSubmit(event) {
     event.preventDefault();
-    const { username, password } = this;
-    this.props.registerAsync(username.value, password.value);
+    const { username, password } = this.state;
+    this.props.registerAsync(username, password);
+  }
+
+  handleInputChange(event) {
+    const { name, value } = event.target;
+    this.setState({
+      ...this.state,
+      [name]: value,
+    });
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="registerContainer">
         <HeaderComponent />
@@ -26,7 +47,8 @@ class RegisterComponent extends Component {
           <div className="inputContainer">
             <input
               type="text"
-              ref={input => this.username = input}
+              name="username"
+              onChange={this.handleInputChange}
               className="input"
               placeholder="username"
             />
@@ -34,7 +56,8 @@ class RegisterComponent extends Component {
           <div className="inputContainer">
             <input
               type="password"
-              ref={input => this.password = input}
+              name="password"
+              onChange={this.handleInputChange}
               className="input"
               placeholder="password"
             />
@@ -50,15 +73,19 @@ class RegisterComponent extends Component {
 
 RegisterComponent.defaultProps = {
   registerAsync: () => {},
+  user: {},
+  history: {},
 };
 
 RegisterComponent.propTypes = {
   registerAsync: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => (
   {
-    auth: state.auth,
+    user: state.auth.user,
   }
 );
 

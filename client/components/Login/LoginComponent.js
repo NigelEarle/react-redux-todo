@@ -9,12 +9,32 @@ class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.state = {
+      username: '',
+      password: '',
+    };
+  }
+
+  componentDidUpdate() {
+    const { user } = this.props;
+    if (user.username) {
+      this.props.history.push('/');
+    }
   }
 
   handleLoginSubmit(event) {
     event.preventDefault();
-    const { username, password } = this;
-    this.props.loginAsync(username.value, password.value);
+    const { username, password } = this.state;
+    this.props.loginAsync(username, password);
+  }
+
+  handleInputChange(event) {
+    const { name, value } = event.target;
+    this.setState({
+      ...this.state,
+      [name]: value,
+    });
   }
 
   render() {
@@ -27,7 +47,8 @@ class LoginComponent extends Component {
             <div className="inputContainer">
               <input
                 type="text"
-                ref={input => this.username = input}
+                name="username"
+                onChange={this.handleInputChange}
                 className="input"
                 placeholder="username"
               />
@@ -35,7 +56,8 @@ class LoginComponent extends Component {
             <div className="inputContainer">
               <input
                 type="password"
-                ref={input => this.password = input}
+                name="password"
+                onChange={this.handleInputChange}
                 className="input"
                 placeholder="password"
               />
@@ -52,15 +74,18 @@ class LoginComponent extends Component {
 
 LoginComponent.defaultProps = {
   loginAsync: () => {},
+  user: {},
 };
 
 LoginComponent.propTypes = {
   loginAsync: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => (
   {
-    auth: state.auth,
+    user: state.auth.user,
   }
 );
 

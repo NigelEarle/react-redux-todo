@@ -12,6 +12,7 @@ const isAuthenticated = (req, res, next) => {
 
 router.get('/', isAuthenticated, (req, res) => {
   const { id } = req.user.dataValues;
+
   Todo.findAll({
     where: {
       UserId: id,
@@ -27,17 +28,18 @@ router.get('/', isAuthenticated, (req, res) => {
 });
 
 router.route('/')
-  .post(isAuthenticated, (req, res) => {
+  .post((req, res) => {
     const {
       title,
       isComplete,
-      UserId,
     } = req.body;
+
+    const { id } = req.user;
 
     const todo = {
       title,
       isComplete,
-      UserId,
+      UserId: id,
     };
 
     Todo.create(todo)
