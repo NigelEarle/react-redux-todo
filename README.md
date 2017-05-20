@@ -55,7 +55,7 @@ Create `config/session.json` in `/server` directory and add the following to cre
 1. Run `npm install` to install depenencies.
 2. Create local DB `react_redux_todo`.
 3. Run `npm start` to start application.
-4. Navigate to `http://localhost:3001` to see running application.
+4. Navigate to `http://localhost:3001`.
 
 ---
 
