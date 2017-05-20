@@ -22,14 +22,14 @@ class HeaderComponent extends Component {
         {(localStorage.getItem('isAuthenticated')) ?
           <div className="headerContainer">
             <div className="linkContainer">
+              <Link to="/" className="link">Home</Link>
+            </div>
+            <div className="linkContainer">
               <Link to="/login" className="link" onClick={this.handleLogout}>Logout</Link>
             </div>
           </div>
           :
           <div className="headerContainer">
-            <div className="linkContainer">
-              <Link to="/" className="link">Home</Link>
-            </div>
             <div className="linkContainer">
               <Link to="/login" className="link">Login</Link>
             </div>
