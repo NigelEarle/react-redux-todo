@@ -53,18 +53,27 @@ const logoutFail = error => (
 // Async actions
 export const loginAsync = (username, password) => (dispatch) => {
   return AuthService.login(username, password)
-    .then(data => dispatch(loginSuccess(data.data)))
+    .then((data) => {
+      localStorage.setItem('isAuthenticated', true);
+      return dispatch(loginSuccess(data.data));
+    })
     .catch(error => dispatch(loginFail(error)));
 };
 
 export const registerAsync = (username, password) => (dispatch) => {
   return AuthService.register(username, password)
-    .then(data => dispatch(registerSuccess(data.data)))
+    .then((data) => {
+      localStorage.setItem('isAuthenticated', true);
+      return dispatch(registerSuccess(data.data));
+    })
     .catch(error => dispatch(registerFail(error)));
 };
 
 export const logoutAsync = () => (dispatch) => {
   return AuthService.logout()
-    .then(() => dispatch(logoutSuccess()))
+    .then(() => {
+      localStorage.clear();
+      dispatch(logoutSuccess());
+    })
     .catch(error => dispatch(logoutFail(error)));
 };

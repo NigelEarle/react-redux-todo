@@ -10,16 +10,25 @@ class RegisterComponent extends Component {
     super(props);
     this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleReidrect = this.handleRedirect.bind(this);
     this.state = {
       username: '',
       password: '',
     };
   }
 
+  componentDidMount() {
+    this.handleRedirect();
+  }
+
   componentDidUpdate() {
-    const { user } = this.props;
-    if (user.username) {
-      this.props.history.push('/');
+    this.handleRedirect();
+  }
+
+  handleRedirect() {
+    const { history } = this.props;
+    if (localStorage.getItem('isAuthenticated')) {
+      history.push('/');
     }
   }
 

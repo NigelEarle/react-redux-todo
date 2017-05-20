@@ -3,6 +3,7 @@ import {
   BrowserRouter,
   Route,
   Switch,
+  Redirect,
 } from 'react-router-dom';
 
 import {
@@ -12,11 +13,26 @@ import {
   RegisterComponent,
 } from '../components';
 
+const PrivateRoute = ({ component: Component }) => (
+  <Route
+    render={() => (
+      (localStorage.getItem('isAuthenticated'))
+        ? <Component />
+        :
+        <Redirect
+          to={{
+            pathname: '/login',
+          }}
+        />
+    )}
+  />
+);
+
 const TodoRouter = () => (
   <BrowserRouter>
     <div className="router">
       <Switch>
-        <Route exact path="/" component={TodoComponent} />
+        <PrivateRoute exact path="/" component={TodoComponent} />
         <Route path="/login" component={LoginComponent} />
         <Route path="/register" component={RegisterComponent} />
         <Route component={NotFoundComponent} />

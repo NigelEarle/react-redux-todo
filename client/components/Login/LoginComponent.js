@@ -10,16 +10,26 @@ class LoginComponent extends Component {
     super(props);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
+
     this.state = {
       username: '',
       password: '',
     };
   }
 
+  componentDidMount() {
+    this.handleRedirect();
+  }
+
   componentDidUpdate() {
-    const { user } = this.props;
-    if (user.username) {
-      this.props.history.push('/');
+    this.handleRedirect();
+  }
+
+  handleRedirect() {
+    const { history } = this.props;
+    if (localStorage.getItem('isAuthenticated')) {
+      history.push('/');
     }
   }
 
@@ -44,7 +54,7 @@ class LoginComponent extends Component {
         <div className="loginContainer">
           <HeaderComponent />
           <h1 className="loginTitle">Login To See Your Todos</h1>
-          {error && 
+          {error &&
             <p className="error">Username / password is invalid</p>
           }
           <form onSubmit={this.handleLoginSubmit} className="loginForm">
@@ -79,14 +89,14 @@ class LoginComponent extends Component {
 LoginComponent.defaultProps = {
   loginAsync: () => {},
   user: {},
-  error: {},
+  error: '',
 };
 
 LoginComponent.propTypes = {
   loginAsync: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  error: PropTypes.object,
+  error: PropTypes.any,
 };
 
 const mapStateToProps = state => (
