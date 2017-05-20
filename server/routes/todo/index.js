@@ -19,10 +19,10 @@ router.get('/', isAuthenticated, (req, res) => {
     raw: true,
   })
   .then((data) => {
-    res.json({ data });
+    res.status(200).json({ data });
   })
   .catch((err) => {
-    res.json({ err });
+    res.status(400).json({ err });
   });
 });
 

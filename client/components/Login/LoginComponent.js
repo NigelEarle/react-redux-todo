@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginAsync } from '../../actions/auth';
+import { HeaderComponent } from '../../components';
 import './LoginComponent.scss';
 
 class LoginComponent extends Component {
@@ -18,29 +19,32 @@ class LoginComponent extends Component {
 
   render() {
     return (
-      <div className="loginContainer">
-        <h1 className="loginTitle">Login To See Your Todos</h1>
-        <form onSubmit={this.handleLoginSubmit} className="loginForm">
-          <div className="inputContainer">
-            <input
-              type="text"
-              ref={input => this.username = input}
-              className="input"
-              placeholder="username"
-            />
-          </div>
-          <div className="inputContainer">
-            <input
-              type="password"
-              ref={input => this.password = input}
-              className="input"
-              placeholder="password"
-            />
-          </div>
-          <div className="inputContainer">
-            <input type="submit" className="submit" value="Log In" />
-          </div>
-        </form>
+      <div>
+        <div className="loginContainer">
+          <HeaderComponent />
+          <h1 className="loginTitle">Login To See Your Todos</h1>
+          <form onSubmit={this.handleLoginSubmit} className="loginForm">
+            <div className="inputContainer">
+              <input
+                type="text"
+                ref={input => this.username = input}
+                className="input"
+                placeholder="username"
+              />
+            </div>
+            <div className="inputContainer">
+              <input
+                type="password"
+                ref={input => this.password = input}
+                className="input"
+                placeholder="password"
+              />
+            </div>
+            <div className="inputContainer">
+              <input type="submit" className="submit" value="Log In" />
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkSession } from '../../utils/authorized';
+import { HeaderComponent } from '../../components';
 import './TodoComponent.scss';
 
 import {
@@ -93,6 +94,7 @@ class TodoComponent extends Component {
 
     return (
       <div className="todoContainer">
+        <HeaderComponent />
         { !isLoggedIn ?
           <Redirect to="/login" />
           : this.renderTodos(todos, title)

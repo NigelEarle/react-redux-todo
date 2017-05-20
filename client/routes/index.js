@@ -10,13 +10,11 @@ import {
   TodoComponent,
   NotFoundComponent,
   RegisterComponent,
-  HeaderComponent,
 } from '../components';
 
 const TodoRouter = () => (
   <BrowserRouter>
     <div className="router">
-      <HeaderComponent />
       <Switch>
         <Route exact path="/" component={TodoComponent} />
         <Route path="/login" component={LoginComponent} />

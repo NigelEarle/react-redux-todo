@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutAsync } from '../../actions/auth';
+import { checkSession } from '../../utils/authorized';
 import './HeaderComponent.scss';
 
 class HeaderComponent extends Component {

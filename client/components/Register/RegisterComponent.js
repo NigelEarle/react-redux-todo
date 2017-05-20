@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { registerAsync } from '../../actions/auth';
+import { HeaderComponent } from '../../components';
 import './RegisterComponent.scss';
 
 class RegisterComponent extends Component {
@@ -19,6 +20,7 @@ class RegisterComponent extends Component {
   render() {
     return (
       <div className="registerContainer">
+        <HeaderComponent />
         <h1 className="registerTitle">Register To Create Todos</h1>
         <form onSubmit={this.handleRegisterSubmit} className="registerForm">
           <div className="inputContainer">
@@ -38,7 +40,7 @@ class RegisterComponent extends Component {
             />
           </div>
           <div className="inputContainer">
-            <input type="submit" className="submit" value="Register"/>
+            <input type="submit" className="submit" value="Register" />
           </div>
         </form>
       </div>
