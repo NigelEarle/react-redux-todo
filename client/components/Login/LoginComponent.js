@@ -79,14 +79,14 @@ class LoginComponent extends Component {
 LoginComponent.defaultProps = {
   loginAsync: () => {},
   user: {},
-  error: '',
+  error: {},
 };
 
 LoginComponent.propTypes = {
   loginAsync: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.object,
 };
 
 const mapStateToProps = state => (

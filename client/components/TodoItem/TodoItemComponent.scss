@@ -4,6 +4,7 @@
   border-radius: 3px 3px 0 0;
   border-bottom: none;
   padding: 8px;
+
   .todoTitle{
     line-height: 1.5;
     font-size: 1.5rem;
@@ -13,13 +14,13 @@
       opacity: .4;
     }
   }
-  
 
   .dateCreated {
     font-size: .9rem;
     opacity: .7;
     margin-bottom: 5px;
   }
+
   .editTitle {
     border: none;
     margin-bottom: 7px;
