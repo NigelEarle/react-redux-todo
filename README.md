@@ -61,6 +61,7 @@ Create `config/session.json` in `/server` directory and add the following to cre
 
 ### Things To Complete
 
+* Refactor `LoginComponent` and `RegisterComponent` functionality to single parent.
 * Fix error on refresh `/login` and `/register` routes.
 * Add styles `NotFoundComponent`
 * Add `Jest` front-end unit tests and `Supertest` back-end API endpoint tests.
