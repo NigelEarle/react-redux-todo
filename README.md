@@ -2,7 +2,7 @@
 
 Todo app built with Reactjs, Redux, Webpack, Node.js(Express.js), Sequelize.js, PostgreSQL and Passport.js
 
-If you have not already, you need to install the following to run app locally...
+If you have not already installed, you need the following to run app locally...
 
   * [Node.js(v6.10.3)](https://nodejs.org/en/)
   * [PostgreSQL](https://www.postgresql.org/) / [MySQL](https://www.mysql.com/) / [SQLite](https://www.sqlite.org/)
