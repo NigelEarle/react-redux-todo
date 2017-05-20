@@ -30,8 +30,7 @@ class TodoComponent extends Component {
   componentDidMount() {
     checkSession()
     .then(() => {
-      const { user } = this.props;
-      this.props.fetchTodosAsync(user.id);
+      this.props.fetchTodosAsync();
     })
     .catch(() => {
       this.setState({ isLoggedIn: false });

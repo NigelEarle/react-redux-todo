@@ -10,8 +10,8 @@ const isAuthenticated = (req, res, next) => {
   res.status(401).json({ message: 'unauthorized' });
 };
 
-router.get('/:id', (req, res) => {
-  const { id } = req.params;
+router.get('/', isAuthenticated, (req, res) => {
+  const { id } = req.user.dataValues;
   Todo.findAll({
     where: {
       UserId: id,
@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.route('/')
-  .post((req, res) => {
+  .post(isAuthenticated, (req, res) => {
     const {
       title,
       isComplete,
@@ -48,7 +48,7 @@ router.route('/')
       res.status(400).json({ error });
     });
   })
-  .put((req, res) => {
+  .put(isAuthenticated, (req, res) => {
     const {
       id,
       title,
@@ -80,7 +80,7 @@ router.route('/')
     });
   });
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/delete/:id', isAuthenticated, (req, res) => {
   const { id } = req.params;
   Todo.destroy({
     where: {

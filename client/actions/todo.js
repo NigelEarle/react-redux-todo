@@ -68,8 +68,8 @@ const deleteTodoFail = error => (
 );
 
 // Async actions
-export const fetchTodosAsync = id => (dispatch) => {
-  return TodoService.fetchTodos(id)
+export const fetchTodosAsync = () => (dispatch) => {
+  return TodoService.fetchTodos()
     .then(({ data }) => dispatch(fetchTodosSuccess(data.data)))
     .catch(error => dispatch(fetchTodosFail(error)));
 };

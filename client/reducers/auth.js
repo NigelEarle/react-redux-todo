@@ -10,8 +10,8 @@ import {
 const initialState = {
   error: null,
   user: {
-    id: 1,
-    username: 'nigelearle',
+    id: null,
+    username: '',
   },
 };
 

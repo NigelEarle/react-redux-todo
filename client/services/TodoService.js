@@ -1,8 +1,8 @@
 import xhrReq from '../utils/xhr';
 
-const fetchTodos = (id) => {
+const fetchTodos = () => {
   return xhrReq({
-    path: `/todo/${id}`,
+    path: `/todo`,
   });
 };
 const addTodo = (data) => {
