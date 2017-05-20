@@ -38,11 +38,14 @@ class RegisterComponent extends Component {
   }
 
   render() {
-    console.log(this.state);
+    const { error } = this.props;
     return (
       <div className="registerContainer">
         <HeaderComponent />
         <h1 className="registerTitle">Register To Create Todos</h1>
+        {error &&
+          <p className="error">Username is taken</p>
+        }
         <form onSubmit={this.handleRegisterSubmit} className="registerForm">
           <div className="inputContainer">
             <input
@@ -75,17 +78,20 @@ RegisterComponent.defaultProps = {
   registerAsync: () => {},
   user: {},
   history: {},
+  error: '',
 };
 
 RegisterComponent.propTypes = {
   registerAsync: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  error: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => (
   {
     user: state.auth.user,
+    error: state.auth.error,
   }
 );
 

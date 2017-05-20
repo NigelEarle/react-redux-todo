@@ -38,11 +38,15 @@ class LoginComponent extends Component {
   }
 
   render() {
+    const { error } = this.props;
     return (
       <div>
         <div className="loginContainer">
           <HeaderComponent />
           <h1 className="loginTitle">Login To See Your Todos</h1>
+          {error && 
+            <p className="error">Username / password is invalid</p>
+          }
           <form onSubmit={this.handleLoginSubmit} className="loginForm">
             <div className="inputContainer">
               <input
@@ -75,17 +79,20 @@ class LoginComponent extends Component {
 LoginComponent.defaultProps = {
   loginAsync: () => {},
   user: {},
+  error: '',
 };
 
 LoginComponent.propTypes = {
   loginAsync: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  error: PropTypes.string,
 };
 
 const mapStateToProps = state => (
   {
     user: state.auth.user,
+    error: state.auth.error,
   }
 );
 
