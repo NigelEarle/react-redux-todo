@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { logoutAsync } from '../../actions/auth';
 import './HeaderComponent.scss';
 
-// TODO: Persist logged in user to conditionally set user
 class HeaderComponent extends Component {
   constructor(props) {
     super(props);
@@ -13,24 +12,32 @@ class HeaderComponent extends Component {
   }
 
   handleLogout() {
+    localStorage.clear();
     this.props.logoutAsync();
   }
 
   render() {
     return (
-      <div className="headerContainer">
-        <div className="linkContainer">
-          <Link to="/" className="link">Home</Link>
-        </div>
-        <div className="linkContainer">
-          <Link to="/login" className="link">Login</Link>
-        </div>
-        <div className="linkContainer">
-          <Link to="/register" className="link">Register</Link>
-        </div>
-        <div className="linkContainer">
-          <Link to="/login" className="link" onClick={this.handleLogout}>Logout</Link>
-        </div>
+      <div>
+        {(localStorage.getItem('isAuthenticated')) ?
+          <div className="headerContainer">
+            <div className="linkContainer">
+              <Link to="/login" className="link" onClick={this.handleLogout}>Logout</Link>
+            </div>
+          </div>
+          :
+          <div className="headerContainer">
+            <div className="linkContainer">
+              <Link to="/" className="link">Home</Link>
+            </div>
+            <div className="linkContainer">
+              <Link to="/login" className="link">Login</Link>
+            </div>
+            <div className="linkContainer">
+              <Link to="/register" className="link">Register</Link>
+            </div>
+          </div>
+        }
       </div>
     );
   }

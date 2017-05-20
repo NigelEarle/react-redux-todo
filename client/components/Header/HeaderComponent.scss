@@ -4,16 +4,13 @@
   margin-bottom: 40px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 }
 
 .linkContainer {
+  font-size: 20px;
   margin-right: 5%;
-}
-
-.link {
-  color: #000080;
 }
 
 .link:hover {

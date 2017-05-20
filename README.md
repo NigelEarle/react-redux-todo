@@ -61,8 +61,6 @@ Create `config/session.json` in `/server` directory and add the following to cre
 
 ### Things To Complete
 
-* Conditionally display header links if user is authenticated.
-* Redirect authenticated user to `/` if trying to access `/login` or `/register` routes.
 * Fix error on refresh `/login` and `/register` routes.
 * Add styles `NotFoundComponent`
 * Add `Jest` front-end unit tests and `Supertest` back-end API endpoint tests.

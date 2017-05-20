@@ -71,9 +71,6 @@ export const registerAsync = (username, password) => (dispatch) => {
 
 export const logoutAsync = () => (dispatch) => {
   return AuthService.logout()
-    .then(() => {
-      localStorage.clear();
-      dispatch(logoutSuccess());
-    })
+    .then(() => dispatch(logoutSuccess()))
     .catch(error => dispatch(logoutFail(error)));
 };
