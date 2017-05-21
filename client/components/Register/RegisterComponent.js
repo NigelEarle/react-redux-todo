@@ -35,7 +35,9 @@ class RegisterComponent extends Component {
   handleRegisterSubmit(event) {
     event.preventDefault();
     const { username, password } = this.state;
-    this.props.registerAsync(username, password);
+    if (username !== '' && password !== '') {
+      this.props.registerAsync(username, password);
+    }
   }
 
   handleInputChange(event) {
