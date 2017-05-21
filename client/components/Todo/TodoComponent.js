@@ -3,8 +3,12 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkSession } from '../../utils/authorized';
-import { HeaderComponent } from '../../components';
 import './TodoComponent.scss';
+
+import {
+  HeaderComponent,
+  TodoItemComponent,
+} from '../../components';
 
 import {
   fetchTodosAsync,
@@ -12,8 +16,6 @@ import {
   updateTodoAsync,
   deleteTodoAsync,
 } from '../../actions/todo';
-
-import { TodoItemComponent } from '../../components';
 
 class TodoComponent extends Component {
   constructor(props) {
@@ -34,6 +36,7 @@ class TodoComponent extends Component {
       this.props.fetchTodosAsync();
     })
     .catch(() => {
+      localStorage.clear();
       this.setState({ isLoggedIn: false });
     });
   }
