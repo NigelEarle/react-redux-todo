@@ -87,14 +87,14 @@ RegisterComponent.defaultProps = {
   registerAsync: () => {},
   user: {},
   history: {},
-  error: {},
+  error: '',
 };
 
 RegisterComponent.propTypes = {
   registerAsync: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  error: PropTypes.object,
+  error: PropTypes.string,
 };
 
 const mapStateToProps = state => (

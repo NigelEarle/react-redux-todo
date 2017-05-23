@@ -96,7 +96,7 @@ LoginComponent.propTypes = {
   loginAsync: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  error: PropTypes.any,
+  error: PropTypes.string,
 };
 
 const mapStateToProps = state => (
