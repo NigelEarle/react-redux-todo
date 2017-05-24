@@ -25,6 +25,7 @@ devConfig.module.rules.push(
       'style-loader',
       'css-loader',
       'sass-loader',
+      'postcss-loader',
     ],
   } // eslint-disable-line
 );
