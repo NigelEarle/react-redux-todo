@@ -2,7 +2,7 @@ FROM node:boron-alpine
 
 MAINTAINER Nigel Earle 'nigel@earle.io'
 
-ENV PORT=5000
+EXPOSE 5000
 
 ADD ./server.js /app/
 ADD ./package.json /app/
